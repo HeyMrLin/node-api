@@ -1,9 +1,25 @@
-var express = require('express');
-var router = express.Router();
+const router = require('koa-router')();
+const pool = require('../lib/mysql');
+const { query } = pool;
+router.prefix('/users');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+
+router.get('/', function *(next) {
+  // select * from users where username=? and password=?
+  const _sql = 'select * from users where username=? and password=?'
+  yield res = query( _sql, [ 'Tom', 254 ] );
+  res.then(e => {
+    console.log(e.length);
+    this.body = {
+      message: 'success',
+      status: 1,
+      data: e,
+    }
+  })
+});
+
+router.get('/bar', function *(next) {
+  this.body = 'this is a users/bar response!';
 });
 
 module.exports = router;
