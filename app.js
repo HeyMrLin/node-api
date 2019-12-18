@@ -1,12 +1,12 @@
-var app = require('koa')()
-  , logger = require('koa-logger')
+const Koa = require('koa');
+const app = new Koa();
+var logger = require('koa-logger')
   , json = require('koa-json')
   , views = require('koa-views')
   , onerror = require('koa-onerror');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-var login = require('./routes/login');
+const registerRouter  = require('./routes')
+
 
 // error handler
 onerror(app);
@@ -20,9 +20,9 @@ app.use(require('koa-bodyparser')());
 app.use(json());
 app.use(logger());
 
-app.use(function *(next){
+app.use(async (next) => {
   var start = new Date;
-  yield next;
+  await next;
   var ms = new Date - start;
   console.log('%s %s - %s', this.method, this.url, ms);
 });
@@ -30,9 +30,7 @@ app.use(function *(next){
 app.use(require('koa-static')(__dirname + '/public'));
 
 // routes definition
-app.use(index.routes(), index.allowedMethods());
-app.use(users.routes(), users.allowedMethods());
-app.use(login.routes(), login.allowedMethods());
+app.use(registerRouter());
 
 // error-handling
 app.on('error', (err, ctx) => {

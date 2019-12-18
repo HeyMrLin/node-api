@@ -4,10 +4,10 @@ const { query } = pool;
 router.prefix('/users');
 
 
-router.get('/', function *(next) {
+router.get('/', async (next) => {
   // select * from users where username=? and password=?
   const _sql = 'select * from users where username=? and password=?'
-  yield res = query( _sql, [ 'Tom', 254 ] );
+  let res = await query( _sql, [ 'Tom', 254 ] );
   res.then(e => {
     console.log(e.length);
     this.body = {
