@@ -2,11 +2,14 @@ const Koa = require('koa');
 const app = new Koa();
 
 const users = require('./routes/users');
-const koaRouter =  require('koa-router')
-const router = koaRouter()
+const registerRouter  = require('./routes')
+// router.get('/', async (ctx, next) => {
+//   ctx.response.body = '<h1>Index</h1>';
+// });
 
-router.use('/users', users.routes()) 
+// app.use(users.routes()).use(users.allowedMethods());
+// router.use('/users', users.routes()) 
 
-app.use(router.routes(), router.allowedMethods());
-
+// app.use(router.routes(), router.allowedMethods());
+app.use(registerRouter())
 module.exports = app;

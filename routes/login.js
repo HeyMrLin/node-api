@@ -3,10 +3,10 @@ const router = new Router()
 const JwtUtil = require('../middleware/jwt');
 router.prefix('/login');
 
-router.get('/', async (next) => {
+router.get('/', async (ctx, next) => {
   const jwt = new JwtUtil({name: 'lin'});
   const token = jwt.generateToken();
-  this.body = token;
+  ctx.response.body = token;
 });
 
 module.exports = router;

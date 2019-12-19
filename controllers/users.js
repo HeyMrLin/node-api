@@ -61,7 +61,7 @@ class userController {
         ctx.body = {
           code: 412,
           msg: '查询失败',
-          data
+          // data
         }
       }
     } else {

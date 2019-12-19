@@ -3,9 +3,9 @@ const router = new Router()
 router.prefix('/');
 
 
-router.get('/', async (next) => {
-  this.body = 'this is a home response!';
-  next();
+router.get('/', async (ctx, next) => {
+  ctx.response.body = 'this is a home response!';
+  // next;
 });
 
 router.get('/bar', function *(next) {

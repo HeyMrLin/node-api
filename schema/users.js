@@ -32,6 +32,7 @@ module.exports = function (sequelize, DataTypes) {
      * 如果为fasle，mysql创建的表名称会是复数，即users
      * 如果指定的表名称本身就是复数，则形式不变
      */
-    freezeTableName: true
+    freezeTableName: false,
+    timestamps: false,
   });
 }
