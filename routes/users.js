@@ -1,25 +1,8 @@
-const router = require('koa-router')();
-const pool = require('../lib/mysql');
-const { query } = pool;
-router.prefix('/users');
+const Router = require('koa-router');
+const router = new Router();
+const UserController = require('../controllers/users');
+router.prefix('/user');
 
 
-router.get('/', async (next) => {
-  // select * from users where username=? and password=?
-  const _sql = 'select * from users where username=? and password=?'
-  let res = await query( _sql, [ 'Tom', 254 ] );
-  res.then(e => {
-    console.log(e.length);
-    this.body = {
-      message: 'success',
-      status: 1,
-      data: e,
-    }
-  })
-});
-
-router.get('/bar', function *(next) {
-  this.body = 'this is a users/bar response!';
-});
-
-module.exports = router;
+router.get('/user/:id',UserController.detail)
+module.exports = router

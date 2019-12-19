@@ -9,6 +9,7 @@ registerRouter = () => {
       routers.push(require(router).routes())
       routers.push(require(router).allowedMethods())
     })
+    // console.log(routers);
   return compose(routers)
 }
 

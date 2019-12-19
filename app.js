@@ -1,40 +1,12 @@
 const Koa = require('koa');
 const app = new Koa();
-var logger = require('koa-logger')
-  , json = require('koa-json')
-  , views = require('koa-views')
-  , onerror = require('koa-onerror');
 
-const registerRouter  = require('./routes')
+const users = require('./routes/users');
+const koaRouter =  require('koa-router')
+const router = koaRouter()
 
+router.use('/users', users.routes()) 
 
-// error handler
-onerror(app);
-
-// global middlewares
-app.use(views('views', {
-  root: __dirname + '/views',
-  default: 'jade'
-}));
-app.use(require('koa-bodyparser')());
-app.use(json());
-app.use(logger());
-
-app.use(async (next) => {
-  var start = new Date;
-  await next;
-  var ms = new Date - start;
-  console.log('%s %s - %s', this.method, this.url, ms);
-});
-
-app.use(require('koa-static')(__dirname + '/public'));
-
-// routes definition
-app.use(registerRouter());
-
-// error-handling
-app.on('error', (err, ctx) => {
-  console.error('server error', err, ctx)
-});
+app.use(router.routes(), router.allowedMethods());
 
 module.exports = app;

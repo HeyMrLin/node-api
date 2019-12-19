@@ -1,6 +1,6 @@
-const router = require('koa-router')();
-const JwtUtil = require('../lib/jwt');
-
+const Router = require('koa-router');
+const router = new Router()
+const JwtUtil = require('../middleware/jwt');
 router.prefix('/login');
 
 router.get('/', async (next) => {
