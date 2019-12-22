@@ -1,6 +1,6 @@
 const Router = require('koa-router');
 const router = new Router()
-router.prefix('/');
+router.prefix('/home');
 
 
 router.get('/', async (ctx, next) => {
