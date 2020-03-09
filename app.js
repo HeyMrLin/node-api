@@ -9,9 +9,9 @@ const cors = require('koa2-cors');
 app.use(bodyParser())
 // app.use(router.routes(), router.allowedMethods());
 app.use(registerRouter())
-// app.use(static_(
-//   path.join(__dirname, '/public')
-// ))
+app.use(static_(
+  path.join(__dirname, '/public')
+))
 app.use(cors({
   origin: '*',
   exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
