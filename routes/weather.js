@@ -1,7 +1,7 @@
 const Router = require('koa-router');
 const router = new Router();
 const koa2Req = require('koa2-request');
-router.prefix('/weather');
+// router.prefix('/weather');
 
 
 router.get('/', async (ctx, next) => {
