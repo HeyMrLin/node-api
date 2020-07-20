@@ -48,7 +48,7 @@ class userController {
     let id = ctx.params.id;
     if (id) {
       try {
-        // 查询文章详情模型
+        // 查询文章详情模型1
         let data = await UserModel.getUserDetail(id);
         ctx.response.status = 200;
         ctx.body = {
